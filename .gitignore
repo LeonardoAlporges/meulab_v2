@@ -40,6 +40,14 @@ yarn-error.*
 .env.*
 !.env.example
 
+# Configuration files
+app.json
+eas.json
+google-services.json
+
+# Batch files
+*.bat
+
 # typescript
 *.tsbuildinfo
 
