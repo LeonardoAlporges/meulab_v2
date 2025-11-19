@@ -47,11 +47,12 @@ export const useDrawerContent = () => {
           },
           {
             title: "Monitoramento de Reservas",
-            screen: "MonitoramentoDeReserva",
+            screen: "RoomReservationList",
           },
           { title: "Monitores", screen: "MonitorList" },
           { title: "Horários Monitores", screen: "MonitorSchedulesLab" },
           { title: "Enviar Notificação", screen: "RegistraNotificacao" },
+          { title: "Alterar Coordenador", screen: "AlterarCoordenador" },
         ],
       },
       {
@@ -84,13 +85,12 @@ export const useDrawerContent = () => {
         ],
       },
       {
-        key: "reservation",
-        title: "Reserva de Sala",
-        icon: "meeting-room",
+        key: "watchman",
+        title: "Vigilante",
+        icon: "security",
         condition: user?.isWatchman,
         items: [
-          { title: "Solicitar Cartão Magnético", screen: "ReservaSala" },
-          { title: "Verificar Reservas", screen: "MonitoramentoDeReserva" },
+          { title: "Ver Reservas", screen: "RoomReservationList" },
         ],
       },
               {

@@ -11,8 +11,8 @@ export const createQuickAccessItems = (
   {
     title: "Horários de aula",
     icon: "calendar-clock",
-    route: "HorariosAula",
-    onPress: handlers.horariosAula || (() => {}),
+    route: "LessonSchedule",
+    onPress: handlers.lessonSchedule || (() => {}),
   },
   {
     title: "Calendário acadêmico",
@@ -46,13 +46,49 @@ export const createQuickAccessItems = (
   },
   {
     title: "Solicitar Suporte",
-    icon: "support-agent",
+    icon: "account-voice",
     route: "SolicitarSuporte",
     onPress: handlers.solicitarSuporte || (() => {}),
   },
   {
+    title: "Reserva de Sala",
+    icon: "door-open",
+    route: "RoomReservationTerms",
+    onPress: handlers.reservaSala || (() => {}),
+  },
+  {
+    title: "Seja Monitor",
+    icon: "account-school",
+    route: "SejaMonitor",
+    onPress: handlers.sejaMonitor || (() => {}),
+  },
+  {
+    title: "Contato Dev",
+    icon: "email-edit-outline",
+    route: "ContatoDesenvolvedor",
+    onPress: handlers.contatoDev || (() => {}),
+  },
+  {
+    title: "Grade Sistemas",
+    icon: "book-outline",
+    route: "CurriculumSI",
+    onPress: handlers.gradeSistemas || (() => {}),
+  },
+  {
+    title: "Mapa UFES",
+    icon: "map",
+    route: "MapUfes",
+    onPress: handlers.mapaUfes || (() => {}),
+  },
+  {
+    title: "Site do CASI",
+    icon: "web",
+    route: "SiteCasi",
+    onPress: handlers.siteCasi || (() => {}),
+  },
+  {
     title: "Horários Monitores",
-    icon: "schedule",
+    icon: "clock-outline",
     route: "MonitorSchedulesLab",
     onPress: handlers.horariosMonitores || (() => {}),
   },

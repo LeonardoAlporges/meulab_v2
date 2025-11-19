@@ -1,0 +1,107 @@
+import { MapCategory } from "../useUfesMap";
+
+export const mapCategories: MapCategory[] = [
+  {
+    name: "Edificações e setores",
+    icon: "apartment",
+    points: [
+      { name: "Administração do Campus", coordinates: [-41.5355891, -20.7618047] },
+      { name: "SUGRAD", coordinates: [-41.5361376, -20.7621446] },
+      { name: "Biblioteca", coordinates: [-41.5357205, -20.7615338] },
+      { name: "Cantina", coordinates: [-41.5363292, -20.7610232] },
+      { name: "Restaurante Universitário (RU)", coordinates: [-41.5360237, -20.76266] },
+      { name: "STI - Tecnologia da Informação", coordinates: [-41.5366352, -20.7621659] },
+      {
+        name: 'Saúde e Assistência Social (SASAS) - "Castelinho"',
+        coordinates: [-41.5353531, -20.7616367],
+      },
+      { name: "Moradia estudantil", coordinates: [-41.5371555, -20.760498] },
+      { name: "Quadra de esportes", coordinates: [-41.5364957, -20.7624066] },
+      { name: "Bancos", coordinates: [-41.5359512, -20.7621484] },
+      { name: "Almoxarifado", coordinates: [-41.5351519, -20.7618925] },
+    ],
+  },
+  {
+    name: "Departamentos e cursos",
+    icon: "school",
+    points: [
+      { name: "Biologia", coordinates: [-41.5354415, -20.7621934] },
+      { name: "Ciências Florestais e da Madeira", coordinates: [-41.3888642, -20.7909427] },
+      { name: "Computação", coordinates: [-41.5362784, -20.7622536] },
+      { name: "Engenharia Rural", coordinates: [-41.5353745, -20.7621081] },
+      { name: "Engenharia de Alimentos", coordinates: [-41.5353235, -20.762028] },
+      { name: "Farmácia e Nutrição", coordinates: [-41.5355355, -20.7623539] },
+      { name: "Geologia", coordinates: [-41.5366781, -20.7603902] },
+      { name: "Matemática Pura e Aplicada", coordinates: [-41.5356749, -20.7624944] },
+      { name: "Medicina Veterinária", coordinates: [-41.5356105, -20.7624368] },
+      { name: 'Produção Vegetal - "Tijolinho"', coordinates: [-41.5367076, -20.7618223] },
+      { name: "Química e Física", coordinates: [-41.5356428, -20.7619502] },
+      { name: "Zootecnia", coordinates: [-41.5359566, -20.7622411] },
+    ],
+  },
+  {
+    name: "Laboratórios e salas de aula",
+    icon: "science",
+    points: [
+      { name: '"Prédio Central", "Prédio Velho"', coordinates: [-41.536037, -20.7621458] },
+      { name: '"Prédio Novo", "Laboratorial"', coordinates: [-41.5367076, -20.7611827] },
+      {
+        name: '"Reuni" - Laboratórios e salas de aula',
+        coordinates: [-41.5358788, -20.7611376],
+      },
+      {
+        name: '"Engenharia de Alimentos e Nutrição"',
+        coordinates: [-41.5369892, -20.7607137],
+      },
+      { name: "Anatomia Animal", coordinates: [-41.5368846, -20.7608893] },
+      { name: "Biotecnologia", coordinates: [-41.5367425, -20.7615489] },
+      {
+        name: '"Chichiu" - Informática e microscopia',
+        coordinates: [-41.5365359, -20.7620932],
+      },
+      { name: '"Prédio da Pós", "Pós-graduação"', coordinates: [-41.5355542, -20.7612881] },
+      { name: "NUDEMAFI", coordinates: [-41.5366566, -20.7619928] },
+    ],
+  },
+  {
+    name: "Áreas experimentais",
+    icon: "map",
+    points: [
+      { name: "Área de Rive - Alegre", coordinates: [-41.4889401, -20.7512882] },
+      { name: "Área de São José do Calçado", coordinates: [-41.6480702, -21.0642924] },
+      { name: "Área Jerônimo Monteiro", coordinates: [-41.4056709, -20.7957922] },
+    ],
+  },
+  {
+    name: "Área Experimental - Rive",
+    icon: "agriculture",
+    points: [
+      { name: "Gerência de Áreas Experimentais", coordinates: [-41.4877144, -20.7506812] },
+      { name: "HOVET - Gerência e Secretaria", coordinates: [-41.4887255, -20.7515365] },
+      { name: "HOVET - Clínica Grandes Animais", coordinates: [-41.4888221, -20.7510875] },
+      { name: "HOVET - Necrópsia", coordinates: [-41.488578, -20.7511602] },
+      { name: "HOVET - Canil", coordinates: [-41.4891869, -20.7510022] },
+      { name: "HOVET - Gatil", coordinates: [-41.4886451, -20.750794] },
+      { name: "Salas de Aula", coordinates: [-41.488511, -20.7512505] },
+      { name: "Biotério", coordinates: [-41.4889696, -20.7500366] },
+      { name: "Viveiro", coordinates: [-41.4876017, -20.7506059] },
+      { name: "Laboratório de Solos", coordinates: [-41.4879692, -20.7513383] },
+      { name: "Casas de Vegetação", coordinates: [-41.4881784, -20.7509019] },
+      { name: "Recursos Hídricos", coordinates: [-41.4880121, -20.7527479] },
+      { name: "Casa de Máquinas", coordinates: [-41.4882588, -20.7530238] },
+      { name: "Prédio Laticínios", coordinates: [-41.4851475, -20.7480977] },
+      { name: "Posto de Vigilância", coordinates: [-41.4851716, -20.7486671] },
+      { name: "Depósito", coordinates: [-41.4852548, -20.7488125] },
+      { name: "Agroecologia", coordinates: [-41.4853406, -20.7462315] },
+      { name: "Aviário", coordinates: [-41.4882052, -20.7453235] },
+      { name: "Aprisco", coordinates: [-41.4871135, -20.7449347] },
+      {
+        name: "Bovinocultura de Leite (Curral)",
+        coordinates: [-41.4868802, -20.7454088],
+      },
+      { name: "Suinocultura", coordinates: [-41.4883715, -20.7449021] },
+      { name: "Laboratorial", coordinates: [-41.488747, -20.7513684] },
+    ],
+  },
+];
+

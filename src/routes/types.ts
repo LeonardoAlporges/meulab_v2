@@ -1,55 +1,56 @@
-import { DrawerNavigationProp as DrawerNavProp } from '@react-navigation/drawer';
-import { NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { DrawerNavigationProp as DrawerNavProp } from "@react-navigation/drawer";
+import { NavigatorScreenParams } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { Reservation } from "@services/reservationService/types";
 
 // Types for each screen's params
 export type RootStackParamList = {
-    Home: NavigatorScreenParams<DrawerParamList>;
-    SejaMonitor: undefined;
-    ReservaSala: undefined;
-    UsageRegulation: undefined;
-    SuporteTecnico: undefined;
-    Infrastructure: undefined;
-    Contact: undefined;
-    LabFiveUsage: undefined;
-    SolicitarSuporte: undefined;
-    SupportForm: undefined;
-    SupportRequests: undefined;
-    SupportDetails: { id?: string };
-    OccurrenceForm: undefined;
-    OccurrenceRequests: undefined;
-    OccurrenceDetails: { id?: string };
-    Solicitacoes: undefined;
-    RegistraOcorrencia: undefined;
-    RegistrosDeOcorrencia: undefined;
-    MonitoramentoDeOcorrencia: undefined;
-    MonitoramentoDeSuporte: undefined;
-    DetalhesSuporte: { id?: string };
-    DetalhesOcorrencia: { id?: string };
-    MonitorList: undefined;
-    DetalhesMonitor: { id?: string };
-    MonitorSchedules: { monitorId?: number } | undefined;
-    RegistraNotificacao: undefined;
-    Notificacoes: undefined;
-    SolicitarCartao: undefined;
-    SolicitacaoReserva: undefined;
-    DetalhesReserva: { item?: unknown };
-    AlterarCoordenador: undefined;
-    MonitoramentoDeReserva: undefined;
-    ContatoDesenvolvedor: undefined;
-    ListaCoordenadores: undefined;
-    MonitorSchedulesLab: undefined;
+  Home: NavigatorScreenParams<DrawerParamList>;
+  UsageRegulation: undefined;
+  Infrastructure: undefined;
+  Contact: undefined;
+  LabFiveUsage: undefined;
+  SolicitarSuporte: undefined;
+  SupportForm: undefined;
+  SupportRequests: undefined;
+  SupportDetails: { id?: string };
+  OccurrenceForm: undefined;
+  OccurrenceRequests: undefined;
+  OccurrenceDetails: { id?: string };
+  Notificacoes: undefined;
+  SejaMonitor: undefined;
+  AlterarCoordenador: undefined;
+  CurriculumSI: undefined;
+  ContatoDesenvolvedor: undefined;
+  MapUfes: undefined;
+  LessonSchedule: undefined;
+  SiteCasi: undefined;
+  MonitorList: undefined;
+  MonitorSchedules: { monitorId?: number } | undefined;
+  RegistraNotificacao: undefined;
+  MonitorSchedulesLab: undefined;
+  RoomReservationTerms: undefined;
+  RoomReservationForm: undefined;
+  RoomReservationList: undefined;
+  RoomReservationDetails: { reservation?: Reservation } | undefined;
+  RegistraOcorrencia?: undefined;
+  RegistrosDeOcorrencia?: undefined;
+  MonitoramentoDeReserva?: undefined;
+  DetalhesReserva?: { item?: unknown };
 };
 
 export type DrawerParamList = {
-    Menu: undefined;
+  Menu: undefined;
 };
 
 export type AuthStackParamList = {
-    Login: undefined;
+  Login: undefined;
 };
 
 // Export types for use in components
-export type RootStackNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<RootStackParamList, T>;
+export type RootStackNavigationProp<T extends keyof RootStackParamList> =
+  NativeStackNavigationProp<RootStackParamList, T>;
 export type DrawerNavigationProp = DrawerNavProp<DrawerParamList>;
-export type AuthStackNavigationProp = NativeStackNavigationProp<AuthStackParamList>;
+export type AuthStackNavigationProp =
+  NativeStackNavigationProp<AuthStackParamList>;

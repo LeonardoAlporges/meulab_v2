@@ -29,3 +29,7 @@ export interface LoginAsWatchmanRequest {
   password: string;
   expoToken: string;
 }
+
+export interface ChangeCoordinatorRequest {
+  institutionalEmail: string;
+}

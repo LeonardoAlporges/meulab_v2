@@ -40,6 +40,29 @@ export const NotificationIcon = styled(MaterialIcons)`
   color: ${theme.colors.background};
 `;
 
+export const NotificationWrapper = styled.View({
+  position: "relative",
+});
+
+export const NotificationBadge = styled.View({
+  position: "absolute",
+  top: -4,
+  right: -4,
+  minWidth: 20,
+  height: 20,
+  borderRadius: 10,
+  backgroundColor: theme.colors.secondary,
+  alignItems: "center",
+  justifyContent: "center",
+  paddingHorizontal: 4,
+});
+
+export const NotificationBadgeText = styled.Text({
+  fontSize: 10,
+  color: theme.colors.background,
+  fontFamily: theme.font.paragraph.sm.fontFamily,
+});
+
 export const labelStyles = StyleSheet.create({
   greeting: {
     color: theme.colors.background,

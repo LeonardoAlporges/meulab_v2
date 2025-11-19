@@ -36,12 +36,14 @@ export const routes = {
   // Reservation Service
   reservation: {
     base: "/reservation",
+    create: "/reservation",
+    getAll: "/reservation",
     getByUser: (idUser: string | number) => `/reservation/${idUser}`,
     delivered: (idReserva: string | number) =>
       `/reservation/delivered/${idReserva}`,
     returned: (idReserva: string | number) =>
       `/reservation/returned/${idReserva}`,
-    analysis: "/reservation/analisy",
+    analysis: "/reservation/analyze",
   },
 
   // Occurrence Service
@@ -70,10 +72,13 @@ export const routes = {
   // Notification Service
   notification: {
     base: "/notification",
+    create: "/notification",
     delete: (idNotificao: string | number) => `/notification/${idNotificao}`,
     user: (id_user: string | number) => `/notification/user/${id_user}`,
     userNumber: (id_user: string | number) =>
       `/notification/user/number/${id_user}`,
+    markAsRead: (idNotification: string | number) =>
+      `/notification/user/${idNotification}`,
   },
 
   ru: {

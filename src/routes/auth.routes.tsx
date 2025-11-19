@@ -12,6 +12,19 @@ import RequestSupport from "@screens/Core/Support/RequestSupport";
 import SupportForm from "@screens/Core/Support/SupportForm";
 import SupportRequests from "@screens/Core/Support/SupportRequests";
 import SupportDetails from "@screens/Core/Support/SupportDetails";
+import RegisterNotification from "@screens/Core/Notification/RegisterNotification";
+import Notifications from "@screens/Core/Notification/Notifications";
+import MonitorApplication from "@screens/Core/MonitorApplication";
+import ChangeCoordinator from "@screens/Core/Coordinator/ChangeCoordinator";
+import CurriculumSI from "@screens/Core/Curriculum/InformationSystems";
+import DeveloperContact from "@screens/Core/DeveloperContact";
+import MapUfes from "@screens/Core/Map/UfesMap";
+import LessonSchedule from "@screens/Core/LessonSchedule";
+import SiteCasi from "@screens/Core/SiteCasi";
+import RoomReservationTerms from "@screens/Core/Reservation/ReservationTerms";
+import RoomReservationForm from "@screens/Core/Reservation/ReservationForm";
+import RoomReservationList from "@screens/Core/Reservation/ReservationRequests";
+import RoomReservationDetails from "@screens/Core/Reservation/ReservationDetails";
 import OccurrenceForm from "@screens/Core/Occurrence/OccurrenceForm";
 import OccurrenceRequests from "@screens/Core/Occurrence/OccurrenceRequests";
 import OccurrenceDetails from "@screens/Core/Occurrence/OccurrenceDetails";
@@ -60,6 +73,40 @@ export default function Routes(): React.JSX.Element {
       <Stack.Screen name="SupportForm" component={SupportForm} />
       <Stack.Screen name="SupportRequests" component={SupportRequests} />
       <Stack.Screen name="SupportDetails" component={SupportDetails} />
+      <Stack.Screen
+        name="RoomReservationTerms"
+        component={RoomReservationTerms}
+      />
+      <Stack.Screen
+        name="RoomReservationForm"
+        component={RoomReservationForm}
+      />
+      <Stack.Screen
+        name="RoomReservationList"
+        component={RoomReservationList}
+      />
+      <Stack.Screen
+        name="RoomReservationDetails"
+        component={RoomReservationDetails}
+      />
+      <Stack.Screen
+        name="RegistraNotificacao"
+        component={RegisterNotification}
+      />
+      <Stack.Screen name="Notificacoes" component={Notifications} />
+      <Stack.Screen name="SejaMonitor" component={MonitorApplication} />
+      <Stack.Screen
+        name="AlterarCoordenador"
+        component={ChangeCoordinator}
+      />
+      <Stack.Screen name="CurriculumSI" component={CurriculumSI} />
+      <Stack.Screen
+        name="ContatoDesenvolvedor"
+        component={DeveloperContact}
+      />
+      <Stack.Screen name="MapUfes" component={MapUfes} />
+      <Stack.Screen name="LessonSchedule" component={LessonSchedule} />
+      <Stack.Screen name="SiteCasi" component={SiteCasi} />
       <Stack.Screen name="OccurrenceForm" component={OccurrenceForm} />
       <Stack.Screen name="OccurrenceRequests" component={OccurrenceRequests} />
       <Stack.Screen name="OccurrenceDetails" component={OccurrenceDetails} />

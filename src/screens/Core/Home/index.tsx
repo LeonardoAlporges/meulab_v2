@@ -20,8 +20,8 @@ export default function Home() {
   const quickAccessItems = React.useMemo(
     () =>
       createQuickAccessItems({
-        horariosAula: () => {
-          Alert.alert("Horários de aula", "Funcionalidade em desenvolvimento.");
+        lessonSchedule: () => {
+          navigation.navigate("LessonSchedule");
         },
         calendarioAcademico: () => {
           Alert.alert(
@@ -29,20 +29,38 @@ export default function Home() {
             "Funcionalidade em desenvolvimento."
           );
         },
-        miniCurso: () => {
-          Alert.alert("Mini curso", "Funcionalidade em desenvolvimento.");
-        },
-        biblioteca: () => {
-          Alert.alert("Biblioteca", "Funcionalidade em desenvolvimento.");
-        },
-        eventos: () => {
-          Alert.alert("Eventos", "Funcionalidade em desenvolvimento.");
-        },
-        suporte: () => {
-          Alert.alert("Suporte", "Funcionalidade em desenvolvimento.");
-        },
+        // miniCurso: () => {
+        //   Alert.alert("Mini curso", "Funcionalidade em desenvolvimento.");
+        // },
+        // biblioteca: () => {
+        //   Alert.alert("Biblioteca", "Funcionalidade em desenvolvimento.");
+        // },
+        // eventos: () => {
+        //   Alert.alert("Eventos", "Funcionalidade em desenvolvimento.");
+        // },
+        // suporte: () => {
+        //   Alert.alert("Suporte", "Funcionalidade em desenvolvimento.");
+        // },
         solicitarSuporte: () => {
           navigation.navigate("SolicitarSuporte");
+        },
+        reservaSala: () => {
+          navigation.navigate("RoomReservationTerms");
+        },
+        sejaMonitor: () => {
+          navigation.navigate("SejaMonitor");
+        },
+        contatoDev: () => {
+          navigation.navigate("ContatoDesenvolvedor");
+        },
+        gradeSistemas: () => {
+          navigation.navigate("CurriculumSI");
+        },
+        mapaUfes: () => {
+          navigation.navigate("MapUfes");
+        },
+        siteCasi: () => {
+          navigation.navigate("SiteCasi");
         },
         horariosMonitores: () => {
           navigation.navigate("MonitorSchedulesLab");

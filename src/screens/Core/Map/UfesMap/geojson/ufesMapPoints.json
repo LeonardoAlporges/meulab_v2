@@ -1,0 +1,326 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Administração do Campus"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5355891, -20.7618047]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SUGRAD"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5361376, -20.7621446]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Biblioteca"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5357205, -20.7615338]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cantina"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5363292, -20.7610232]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Restaurante Universitário (RU)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5360237, -20.76266]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "STI - Tecnologia da Informação"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5366352, -20.7621659]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Saúde e Assistência Social (SASAS) - \"Castelinho\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5353531, -20.7616367]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Moradia estudantil"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5371555, -20.760498]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Quadra de esportes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5364957, -20.7624066]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bancos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5359512, -20.7621484]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Almoxarifado"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5351519, -20.7618925]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Biologia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5354415, -20.7621934]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ciências Florestais e da Madeira"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.3888642, -20.7909427]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Computação"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5362784, -20.7622536]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Engenharia Rural"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5353745, -20.7621081]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Engenharia de Alimentos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5353235, -20.762028]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Farmácia e Nutrição"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5355355, -20.7623539]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Geologia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5366781, -20.7603902]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Matemática Pura e Aplicada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5356749, -20.7624944]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Medicina Veterinária"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5356105, -20.7624368]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Produção Vegetal - \"Tijolinho\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5367076, -20.7618223]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Química e Física"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5356428, -20.7619502]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zootecnia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5359566, -20.7622411]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "\"Prédio Central\", \"Prédio Velho\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.536037, -20.7621458]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "\"Prédio Novo\", \"Laboratorial\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5367076, -20.7611827]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "\"Reuni\" - Laboratórios e salas de aula"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5358788, -20.7611376]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "\"Engenharia de Alimentos e Nutrição\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5369892, -20.7607137]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Anatomia Animal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5368846, -20.7608893]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Biotecnologia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5367425, -20.7615489]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "\"Chichiu\" - Informática e microscopia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5365359, -20.7620932]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "\"Prédio da Pós\", \"Pós-graduação\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5355542, -20.7612881]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NUDEMAFI"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-41.5366566, -20.7619928]
+      }
+    }
+  ]
+}
+

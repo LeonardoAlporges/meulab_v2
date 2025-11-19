@@ -77,7 +77,7 @@ export default function Infrastructure() {
         </S.TextOne>
 
         <Button
-          onPress={() => navigation.navigate("ReservaSala")}
+          onPress={() => navigation.navigate("RoomReservationTerms")}
           title="Reservar Sala"
           type="PRIMARY"
           marginTop={16}
