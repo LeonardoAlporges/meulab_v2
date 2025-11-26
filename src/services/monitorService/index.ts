@@ -2,7 +2,6 @@ import apiInstance from "@services/apiInstance";
 import { routes } from "@utils/routesApi";
 import {
   ImportMonitorRequest,
-  ImportScheduleRequest,
   Monitor,
   MonitorSchedules,
   MonitorSchedulesPublic,
@@ -15,10 +14,6 @@ const listMonitores = async () => {
 
 const importMonitor = async (data: ImportMonitorRequest) => {
   return await apiInstance.post<void>(routes.monitor.import, data);
-};
-
-const importSchedule = async (data: ImportScheduleRequest) => {
-  return await apiInstance.post<void>(routes.monitor.importSchedule, data);
 };
 
 const deleteMonitor = async (idMonitor: string | number) => {
@@ -63,7 +58,6 @@ const getPublicMonitorSchedules = async () => {
 export const monitorService = {
   listMonitores,
   importMonitor,
-  importSchedule,
   deleteMonitor,
   deleteAllMonitores,
   getMonitorSchedules,

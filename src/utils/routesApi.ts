@@ -29,8 +29,7 @@ export const routes = {
     updateTime: (idMonitor: string | number) => `/monitor/${idMonitor}`,
     deleteAll: (idCoordenador: string | number) =>
       `/monitor/all/${idCoordenador}`,
-    import: "/monitor/import",
-    importSchedule: "/monitor/import/schedule",
+    import: "/monitor/timesMonitor",
   },
 
   // Reservation Service

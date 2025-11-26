@@ -1,8 +1,8 @@
 import React from "react";
+import { View } from "react-native";
 
+import { theme } from "@config/theme";
 import { RuMeal } from "@services/ruService/type";
-
-import * as S from "./styles";
 
 interface PageIndicatorsProps {
   meals: RuMeal[];
@@ -13,20 +13,45 @@ export const PageIndicators: React.FC<PageIndicatorsProps> = ({
   meals,
   currentIndex,
 }) => {
-  if (meals.length <= 1) {
+  // Sempre mostra os indicadores se houver refeições (sempre serão 3 cards)
+  if (!meals || meals.length === 0) {
     return null;
   }
 
   return (
-    <S.IndicatorRow>
-      {meals.map((meal, index) => (
-        <S.IndicatorDot
-          key={`${meal.type}-${meal.date}`}
-          active={index === currentIndex}
-          style={index === meals.length - 1 ? { marginRight: 0 } : {}}
-        />
-      ))}
-    </S.IndicatorRow>
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: theme.spacing.sm,
+        marginBottom: theme.spacing.xs,
+        paddingHorizontal: theme.spacing.md,
+        minHeight: 20,
+        width: "100%",
+      }}
+    >
+      {meals.map((meal, index) => {
+        // Usa uma chave única combinando id e index para garantir unicidade
+        const uniqueKey = meal.id
+          ? `indicator-${meal.id}`
+          : `indicator-${index}`;
+        const isActive = index === currentIndex;
+        return (
+          <View
+            key={uniqueKey}
+            style={{
+              width: isActive ? 24 : 8,
+              height: 8,
+              borderRadius: isActive ? 4 : 999,
+              backgroundColor: isActive
+                ? theme.colors.primary
+                : "rgba(20, 51, 89, 0.2)",
+              marginRight: index === meals.length - 1 ? 0 : theme.spacing.xs,
+            }}
+          />
+        );
+      })}
+    </View>
   );
 };
-

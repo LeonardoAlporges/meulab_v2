@@ -1,7 +1,10 @@
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
-import { useCallback, useEffect, useState } from "react";
+import { Directory, File, Paths } from "expo-file-system";
+import { StorageAccessFramework } from "expo-file-system/legacy";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
+import { firebase } from "@config/config";
 import { useAuth } from "@context/AuthContext";
 import { useLoading } from "@context/LoadingContext";
 import { useModal } from "@context/ModalContext";
@@ -12,6 +15,16 @@ export const useMonitorList = () => {
   const { user } = useAuth();
   const { showLoading, hideLoading, isLoading } = useLoading();
   const { showModal, hideModal } = useModal();
+
+  const exampleSpreadsheet = useMemo(
+    () => ({
+      storagePath: "Planilha Exemplo de Importacao.xlsx",
+      fallbackUrl:
+        "https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/Planilha%20Exemplo%20de%20Importacao.xlsx?alt=media&token=f7847a38-709b-4278-ad4a-806a4c46ec70",
+      filename: "Planilha_Exemplo_de_Importacao.xlsx",
+    }),
+    []
+  );
 
   const [monitores, setMonitores] = useState<Monitor[]>([]);
   const [empty, setEmpty] = useState(false);
@@ -28,8 +41,7 @@ export const useMonitorList = () => {
         setEmpty(true);
         if (response.isError) {
           showModal({
-            description:
-              response.value.errorMessage || "Erro ao carregar monitores",
+            description: response.value.errorMessage,
             type: "error",
           });
         }
@@ -55,10 +67,8 @@ export const useMonitorList = () => {
 
       if (!result.canceled && result.assets && result.assets.length > 0) {
         const fileUri = result.assets[0].uri;
-        const base64 = await FileSystem.readAsStringAsync(fileUri, {
-          encoding: "base64",
-        });
-        return base64;
+        const pickedFile = new File(fileUri);
+        return await pickedFile.base64();
       }
       return null;
     } catch (error) {
@@ -72,12 +82,12 @@ export const useMonitorList = () => {
   };
 
   const importMonitors = useCallback(async () => {
-    const base64 = await pickDocument();
-    if (!base64) return;
+    const fileBase64 = await pickDocument();
+    if (!fileBase64) return;
 
     showLoading();
     try {
-      const response = await monitorService.importMonitor({ base64 });
+      const response = await monitorService.importMonitor({ fileBase64 });
       if (response.isSuccess) {
         showModal({
           description: "Monitores importados com sucesso",
@@ -86,8 +96,7 @@ export const useMonitorList = () => {
         await getMonitors();
       } else if (response.isError) {
         showModal({
-          description:
-            response.value.errorMessage || "Erro ao importar monitores",
+          description: response.value.errorMessage,
           type: "error",
         });
       }
@@ -102,50 +111,94 @@ export const useMonitorList = () => {
     }
   }, [showLoading, hideLoading, showModal, getMonitors]);
 
-  const importMonitorSchedules = useCallback(async () => {
-    const base64 = await pickDocument();
-    if (!base64) return;
+  const resolveDocumentDirectory = useCallback(() => {
+    if (Paths?.document) {
+      return Paths.document;
+    }
 
-    showLoading();
+    const legacyDir = (
+      FileSystem as unknown as { documentDirectory?: string | null }
+    ).documentDirectory;
+
+    if (legacyDir) {
+      return new Directory(legacyDir);
+    }
+
+    return null;
+  }, []);
+
+  const getDownloadUrl = useCallback(async () => {
     try {
-      const response = await monitorService.importSchedule({ base64 });
-      if (response.isSuccess) {
-        showModal({
-          description: "Horários importados com sucesso",
-          type: "success",
-        });
-      } else if (response.isError) {
-        showModal({
-          description:
-            response.value.errorMessage || "Erro ao importar horários",
-          type: "error",
-        });
-      }
+      const ref = firebase.storage().ref(exampleSpreadsheet.storagePath);
+      return await ref.getDownloadURL();
     } catch (error) {
-      console.error(error);
+      console.warn("Erro ao obter URL dinâmica, usando fallback.", error);
+      return exampleSpreadsheet.fallbackUrl;
+    }
+  }, [exampleSpreadsheet.fallbackUrl, exampleSpreadsheet.storagePath]);
+
+  const downloadExample = useCallback(async () => {
+    try {
+      showLoading();
+
+      const downloadUrl = await getDownloadUrl();
+      if (!downloadUrl) {
+        throw new Error("URL do arquivo não disponível.");
+      }
+
+      const documentDirectory = resolveDocumentDirectory();
+      if (!documentDirectory) {
+        throw new Error("Diretório de documentos indisponível.");
+      }
+
+      const tempFile = new File(documentDirectory, "temp_planilha.xlsx");
+      await File.downloadFileAsync(downloadUrl, tempFile, { idempotent: true });
+
+      const permissions =
+        await StorageAccessFramework.requestDirectoryPermissionsAsync();
+
+      if (!permissions.granted || !permissions.directoryUri) {
+        tempFile.delete();
+        throw new Error("Nenhuma pasta selecionada.");
+      }
+
+      const mimeType =
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+      const customFileUri = await StorageAccessFramework.createFileAsync(
+        permissions.directoryUri,
+        exampleSpreadsheet.filename.replace(/\.[^/.]+$/, ""),
+        mimeType
+      );
+
+      const fileBytes = await tempFile.bytes();
+      const destinationFile = new File(customFileUri);
+      destinationFile.write(fileBytes);
+
+      tempFile.delete();
+
       showModal({
-        description: "Erro ao importar horários",
+        title: "Download concluído",
+        description: "Planilha salva na pasta escolhida.",
+        type: "success",
+      });
+    } catch (error) {
+      console.error("Erro ao baixar planilha:", error);
+      showModal({
+        description: "Não foi possível baixar a planilha de exemplo.",
         type: "error",
       });
     } finally {
       hideLoading();
     }
-  }, [showLoading, hideLoading, showModal]);
-
-  const downloadExample = useCallback(async () => {
-    showModal({
-      description: "Funcionalidade de download de exemplo em desenvolvimento",
-      type: "error",
-    });
-  }, [showModal]);
-
-  const downloadExampleSchedules = useCallback(async () => {
-    showModal({
-      description:
-        "Funcionalidade de download de exemplo de horários em desenvolvimento",
-      type: "error",
-    });
-  }, [showModal]);
+  }, [
+    getDownloadUrl,
+    resolveDocumentDirectory,
+    exampleSpreadsheet.filename,
+    showLoading,
+    hideLoading,
+    showModal,
+  ]);
 
   const deleteMonitor = useCallback(
     (idMonitor: number) => {
@@ -162,8 +215,7 @@ export const useMonitorList = () => {
             await getMonitors();
           } else if (response.isError) {
             showModal({
-              description:
-                response.value.errorMessage || "Erro ao remover monitor",
+              description: response.value.errorMessage,
               type: "error",
             });
           }
@@ -218,8 +270,7 @@ export const useMonitorList = () => {
           await getMonitors();
         } else if (response.isError) {
           showModal({
-            description:
-              response.value.errorMessage || "Erro ao remover monitores",
+            description: response.value.errorMessage,
             type: "error",
           });
         }
@@ -266,11 +317,8 @@ export const useMonitorList = () => {
     empty,
     getMonitors,
     importMonitors,
-    importMonitorSchedules,
     downloadExample,
-    downloadExampleSchedules,
     deleteMonitor,
     deleteAllMonitors,
   };
 };
-

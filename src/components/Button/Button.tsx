@@ -1,6 +1,6 @@
 import styled from "@emotion/native";
 import React from "react";
-import { TouchableOpacityProps } from "react-native";
+import { ActivityIndicator, TouchableOpacityProps } from "react-native";
 
 import { theme } from "@config/theme";
 
@@ -11,12 +11,16 @@ export interface ButtonProps extends Omit<TouchableOpacityProps, "onPress"> {
   title: string;
   type?: ButtonType;
   marginTop?: number;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 const ButtonContainer = styled.TouchableOpacity<{
   type: ButtonType;
+  disabled?: boolean;
 }>`
   background-color: ${(props) => {
+    if (props.disabled) return "#E0E0E0";
     switch (props.type) {
       case "PRIMARY":
         return theme.colors.primary;
@@ -36,11 +40,14 @@ const ButtonContainer = styled.TouchableOpacity<{
   align-items: center;
   justify-content: center;
   min-height: 54px;
+  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
 `;
 
-const ButtonText = styled.Text<{ type: ButtonType }>`
-  color: ${(props) =>
-    props.type === "TERTIARY" ? theme.colors.primary : "#FFFFFF"};
+const ButtonText = styled.Text<{ type: ButtonType; disabled?: boolean }>`
+  color: ${(props) => {
+    if (props.disabled) return "#A0A0A0";
+    return props.type === "TERTIARY" ? theme.colors.primary : "#FFFFFF";
+  }};
   font-size: ${theme.font.paragraph.md.fontSize}px;
   font-family: ${theme.font.paragraph.md2.fontFamily};
 `;
@@ -51,6 +58,8 @@ export const Button: React.FC<ButtonProps> = ({
   type = "PRIMARY",
   marginTop = 16,
   style,
+  loading = false,
+  disabled = false,
   ...rest
 }) => {
   return (
@@ -58,9 +67,21 @@ export const Button: React.FC<ButtonProps> = ({
       type={type}
       onPress={onPress}
       style={[{ marginTop }, style]}
+      disabled={disabled || loading}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: disabled || loading, busy: loading }}
       {...rest}
     >
-      <ButtonText type={type}>{title}</ButtonText>
+      {loading ? (
+        <ActivityIndicator
+          size="small"
+          color={type === "TERTIARY" ? theme.colors.primary : "#FFFFFF"}
+        />
+      ) : (
+        <ButtonText type={type} disabled={disabled}>
+          {title}
+        </ButtonText>
+      )}
     </ButtonContainer>
   );
 };

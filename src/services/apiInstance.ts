@@ -4,7 +4,6 @@ import axios, {
   AxiosError,
   AxiosInstance,
   AxiosRequestConfig,
-  AxiosResponse,
   InternalAxiosRequestConfig,
   Method,
 } from "axios";
@@ -50,19 +49,10 @@ verifyNetInfo();
 
 const resolvedBaseURL = isWifiUfes ? API_URL_UFES : API_URL_EXTERNAL;
 
-console.log("🔗 [API] Base URL selecionada:", resolvedBaseURL || "<vazio>");
-
 const api: AxiosInstance = axios.create({
   baseURL: resolvedBaseURL,
   timeout: API_TIMEOUT,
 });
-
-const COLORS = {
-  reset: "\x1b[0m",
-  cyan: "\x1b[36m",
-  magenta: "\x1b[35m",
-  gray: "\x1b[90m",
-};
 
 const resolveUrl = (config: InternalAxiosRequestConfig) => {
   const method = (config.method || "GET").toUpperCase();
@@ -71,66 +61,6 @@ const resolveUrl = (config: InternalAxiosRequestConfig) => {
     : config.url || "";
 
   return { method, url };
-};
-
-const logRequest = (config: InternalAxiosRequestConfig, token?: string) => {
-  const { method, url } = resolveUrl(config);
-
-  console.log(
-    `${COLORS.cyan}📡 [API]${COLORS.reset} ${COLORS.magenta}${method}${COLORS.reset} ${url} ${
-      token ? `${COLORS.gray}(auth)` : ""
-    }`
-  );
-
-  if (config.data) {
-    console.log(
-      `${COLORS.gray}↳ payload:${COLORS.reset}`,
-      typeof config.data === "string"
-        ? config.data
-        : JSON.stringify(config.data, null, 2)
-    );
-  }
-};
-
-const logResponse = (
-  response: AxiosResponse,
-  { isError = false }: { isError?: boolean } = {}
-) => {
-  const { method, url } = resolveUrl(response.config);
-  const icon = isError ? "❌" : "✅";
-  const color = isError ? COLORS.magenta : COLORS.cyan;
-
-  console.log(
-    `${color}📥 [API]${COLORS.reset} ${icon} ${COLORS.magenta}${method}${COLORS.reset} ${url} ${COLORS.gray}status:${COLORS.reset} ${response.status}`
-  );
-
-  if (isError && response.data) {
-    console.log(
-      `${COLORS.gray}↳ erro:${COLORS.reset}`,
-      typeof response.data === "string"
-        ? response.data
-        : JSON.stringify(response.data, null, 2)
-    );
-  }
-};
-
-const logAxiosError = (error: AxiosError) => {
-  if (error.response) {
-    logResponse(error.response, { isError: true });
-    return;
-  }
-
-  const method = (error.config?.method || "GET").toUpperCase();
-  const url = error.config?.baseURL
-    ? `${error.config.baseURL}${error.config.url}`
-    : error.config?.url || "<desconhecida>";
-
-  console.log(
-    `${COLORS.magenta}📥 [API]❌${COLORS.reset} ${COLORS.magenta}${method}${COLORS.reset} ${url} ${COLORS.gray}status:${COLORS.reset} <sem resposta>`
-  );
-  if (error.message) {
-    console.log(`${COLORS.gray}↳ erro:${COLORS.reset} ${error.message}`);
-  }
 };
 
 const buildSuccessResponse = <T>(
@@ -167,6 +97,22 @@ const normalizeBackendResponse = <T>(
   status?: number
 ): ApiResponse<T> => {
   const resolvedStatus = data?.status ?? status ?? 200;
+
+  if (resolvedStatus > 202 && resolvedStatus < 500) {
+    let errorMessage: string | undefined;
+
+    if (typeof data === "string") {
+      errorMessage = data;
+    } else if (data && typeof data.value === "string") {
+      errorMessage = data.value;
+    } else if (data && (data as any).message) {
+      errorMessage = (data as any).message;
+    }
+
+    return buildErrorResponse(resolvedStatus, {
+      errorMessage: errorMessage || getHttpErrorMessage(resolvedStatus),
+    });
+  }
 
   if (
     data &&
@@ -207,7 +153,6 @@ const normalizeAxiosError = (error: unknown): ApiErrorResponse => {
   });
 };
 
-// Function to get token from AsyncStorage
 const getToken = async (): Promise<string | null> => {
   try {
     const token = await AsyncStorage.getItem(TOKEN_KEY);
@@ -218,17 +163,12 @@ const getToken = async (): Promise<string | null> => {
   }
 };
 
-// Interceptor to add token to requests
 api.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     const token = await getToken();
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-
-    logRequest(config, token ?? undefined);
-
-    console.log(config.baseURL, config.url);
 
     return config;
   },
@@ -237,15 +177,11 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor for error handling
 api.interceptors.response.use(
   async (response) => {
-    logResponse(response);
     return response;
   },
   async (error: AxiosError) => {
-    logAxiosError(error);
-
     if (error.response?.status === 401) {
       await AsyncStorage.removeItem(TOKEN_KEY);
       await AsyncStorage.removeItem(USER_KEY);
@@ -254,11 +190,6 @@ api.interceptors.response.use(
   }
 );
 
-/**
- * Generic request wrapper
- * Retorna resposta padronizada: { value: T, status: number } para sucesso
- * Lança erro (throw) caso a requisição falhe
- */
 async function request<T>(
   method: Method,
   url: string,
@@ -277,9 +208,6 @@ async function request<T>(
   }
 }
 
-/**
- * POST request
- */
 export function post<T>(
   url: string,
   payload?: any,
@@ -289,9 +217,6 @@ export function post<T>(
   return request<T>("POST", url, { data: payload, params, ...axiosConfig });
 }
 
-/**
- * GET request
- */
 export function get<T>(
   url: string,
   params?: any,
@@ -300,9 +225,6 @@ export function get<T>(
   return request<T>("GET", url, { params, ...axiosConfig });
 }
 
-/**
- * PUT request
- */
 export function put<T>(
   url: string,
   payload?: any,
@@ -312,9 +234,6 @@ export function put<T>(
   return request<T>("PUT", url, { data: payload, params, ...axiosConfig });
 }
 
-/**
- * PATCH request
- */
 export function patch<T>(
   url: string,
   payload?: any,
@@ -324,9 +243,6 @@ export function patch<T>(
   return request<T>("PATCH", url, { data: payload, params, ...axiosConfig });
 }
 
-/**
- * DELETE request
- */
 export function remove<T>(
   url: string,
   payload?: any,

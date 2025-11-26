@@ -11,12 +11,12 @@ export const IndicatorRow = styled.View({
   paddingHorizontal: theme.spacing.md,
 });
 
-export const IndicatorDot = styled.View<{ active: boolean }>`
-  width: ${(props) => (props.active ? 28 : 10)}px;
-  height: 10px;
-  border-radius: 999px;
-  background-color: ${(props) =>
-    props.active ? theme.colors.primary : "rgba(20, 51, 89, 0.3)"};
-  margin-right: ${theme.spacing.xs}px;
-`;
-
+export const IndicatorDot = styled.View<{ active?: boolean }>((props) => ({
+  width: props.active ? 24 : 8,
+  height: 8,
+  borderRadius: props.active ? 4 : 999,
+  backgroundColor: props.active
+    ? theme.colors.primary
+    : "rgba(20, 51, 89, 0.2)",
+  marginRight: theme.spacing.xs,
+}));

@@ -22,9 +22,7 @@ export default function MonitorList() {
     empty,
     getMonitors,
     importMonitors,
-    importMonitorSchedules,
     downloadExample,
-    downloadExampleSchedules,
     deleteMonitor,
     deleteAllMonitors,
     isLoading,
@@ -49,24 +47,16 @@ export default function MonitorList() {
     >
       <InfoCard
         icon="info"
-        description="Nesta tela você pode gerenciar os monitores do laboratório. Baixe as planilhas de exemplo, importe novos monitores e horários, e gerencie a lista de monitores cadastrados."
+        description="Nesta tela você pode gerenciar os monitores do laboratório. Baixe a planilha de exemplo única, importe monitores e horários de uma só vez e gerencie a lista de monitores cadastrados."
       />
 
-      <Label text="Planilhas de exemplos:" typography="sm" marginBottom={8} />
+      <Label text="Planilha de exemplo:" typography="sm" marginBottom={8} />
 
       <S.ButtonRow>
         <S.ButtonWrapper>
           <Button
             onPress={downloadExample}
-            title="Monitores"
-            type="TERTIARY"
-            marginTop={0}
-          />
-        </S.ButtonWrapper>
-        <S.ButtonWrapper>
-          <Button
-            onPress={downloadExampleSchedules}
-            title="Horários"
+            title="Monitores e horários"
             type="TERTIARY"
             marginTop={0}
           />
@@ -75,14 +65,8 @@ export default function MonitorList() {
 
       <Button
         onPress={importMonitors}
-        title="Importar Novos Monitores"
+        title="Importar monitores e horários"
         marginTop={0}
-      />
-
-      <Button
-        onPress={importMonitorSchedules}
-        title="Importar Horário de Monitores"
-        marginTop={10}
       />
 
       <S.MonitorsContainer>

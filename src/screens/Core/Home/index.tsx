@@ -4,20 +4,28 @@ import { Alert } from "react-native";
 
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
+import { useAuth } from "@context/AuthContext";
 import { RootStackParamList } from "@routes/types";
 
+import { AllServicesGrid } from "./components/AllServicesGrid";
+import { FeaturedCard } from "./components/FeaturedCard";
 import { Header } from "./components/Header";
 import { QuickAccessCarousel } from "./components/QuickAccessCarousel";
 import { RuMenuCard } from "./components/RuMenuCard";
-import { createQuickAccessItems } from "./quickAccessItems";
+import {
+  createQuickAccessItems,
+  getMainQuickAccessItems,
+  getRemainingItems,
+} from "./quickAccessItems";
 import * as S from "./styles";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
 export default function Home() {
   const navigation = useNavigation<NavigationProp>();
+  const { user } = useAuth();
 
-  const quickAccessItems = React.useMemo(
+  const allQuickAccessItems = React.useMemo(
     () =>
       createQuickAccessItems({
         lessonSchedule: () => {
@@ -65,17 +73,56 @@ export default function Home() {
         horariosMonitores: () => {
           navigation.navigate("MonitorSchedulesLab");
         },
+        listagemReservas: () => {
+          navigation.navigate("RoomReservationList");
+        },
       }),
     [navigation]
+  );
+
+  const mainQuickAccessItems = React.useMemo(
+    () =>
+      getMainQuickAccessItems(
+        allQuickAccessItems,
+        user?.isWatchman || false,
+        user?.isCoordinator || false
+      ),
+    [allQuickAccessItems, user?.isWatchman, user?.isCoordinator]
+  );
+
+  const remainingItems = React.useMemo(
+    () =>
+      getRemainingItems(
+        allQuickAccessItems,
+        mainQuickAccessItems,
+        user?.isWatchman || false,
+        user?.isCoordinator || false
+      ),
+    [
+      allQuickAccessItems,
+      mainQuickAccessItems,
+      user?.isWatchman,
+      user?.isCoordinator,
+    ]
+  );
+
+  // Item destacado (Horários de Aula)
+  const featuredItem = React.useMemo(
+    () => allQuickAccessItems.find((item) => item.route === "LessonSchedule"),
+    [allQuickAccessItems]
   );
 
   return (
     <S.Container contentContainerStyle={S.contentContainerStyle}>
       <Header />
 
-      <QuickAccessCarousel items={quickAccessItems} />
+      {featuredItem && <FeaturedCard item={featuredItem} />}
+
+      <QuickAccessCarousel items={mainQuickAccessItems} />
 
       <RuMenuCard />
+
+      {remainingItems.length > 0 && <AllServicesGrid items={remainingItems} />}
     </S.Container>
   );
 }

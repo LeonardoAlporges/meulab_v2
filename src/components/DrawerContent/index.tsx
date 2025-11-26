@@ -27,6 +27,11 @@ export default function DrawerContent(): React.JSX.Element {
             )
         )}
         <DrawerComponents.SimpleMenuItem
+          title="Sair"
+          icon="logout"
+          onPress={handleLogout}
+        />
+        <DrawerComponents.SimpleMenuItem
           title="Feedback e contato"
           icon="support-agent"
           screen="ContatoDesenvolvedor"

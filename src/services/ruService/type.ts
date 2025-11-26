@@ -25,6 +25,7 @@ export interface LunchDinnerMeal {
 export type RuMealDetails = BreakfastMeal | LunchDinnerMeal;
 
 export interface RuMeal {
+  id: number;
   type: MealTypeNumber;
   date: string;
   weekday: string;

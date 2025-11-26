@@ -18,6 +18,7 @@ export const RuMenuCard: React.FC = () => {
     availableMeals,
     pageIndex,
     pageWidth,
+    scrollViewRef,
     handleMomentumScrollEnd,
     handleLayout,
   } = useRuMenuCard();
@@ -44,6 +45,7 @@ export const RuMenuCard: React.FC = () => {
       <S.Container>
         <S.PagerWrapper onLayout={handleLayout}>
           <ScrollView
+            ref={scrollViewRef}
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
@@ -52,13 +54,18 @@ export const RuMenuCard: React.FC = () => {
             scrollEnabled={true}
             contentContainerStyle={{ alignItems: "flex-start" }}
           >
-            {availableMeals.map((meal) => (
-              <MealPage key={meal.type} meal={meal} pageWidth={pageWidth} />
-            ))}
+            {availableMeals.map((meal, index) => {
+              // Usa uma chave única combinando id e index para garantir unicidade
+              const uniqueKey = meal.id
+                ? `meal-page-${meal.id}`
+                : `meal-page-${index}`;
+              return (
+                <MealPage key={uniqueKey} meal={meal} pageWidth={pageWidth} />
+              );
+            })}
           </ScrollView>
         </S.PagerWrapper>
       </S.Container>
-
       <PageIndicators meals={availableMeals} currentIndex={pageIndex} />
     </>
   );

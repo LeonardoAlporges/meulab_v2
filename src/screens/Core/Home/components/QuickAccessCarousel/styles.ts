@@ -52,3 +52,21 @@ export const quickAccessLabel = {
   textAlign: "center" as const,
   color: theme.colors.text,
 };
+
+export const IndicatorRow = styled.View({
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: theme.spacing.sm,
+  marginBottom: theme.spacing.xs,
+  paddingHorizontal: theme.spacing.md,
+});
+
+export const IndicatorDot = styled.View<{ active: boolean }>`
+  width: ${(props) => (props.active ? 24 : 8)}px;
+  height: ${(props) => (props.active ? 8 : 8)}px;
+  border-radius: ${(props) => (props.active ? 4 : 999)}px;
+  background-color: ${(props) =>
+    props.active ? theme.colors.primary : "rgba(20, 51, 89, 0.2)"};
+  margin-right: ${theme.spacing.xs}px;
+`;

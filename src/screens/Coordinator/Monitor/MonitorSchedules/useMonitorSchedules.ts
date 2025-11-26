@@ -82,8 +82,7 @@ export const useMonitorSchedules = () => {
         setEditedHours(getEmptyHours());
         if (response.isError) {
           showModal({
-            description:
-              response.value?.errorMessage || "Erro ao carregar horários",
+            description: response.value?.errorMessage,
             type: "error",
           });
         }
@@ -149,8 +148,7 @@ export const useMonitorSchedules = () => {
           await getSchedules();
         } else if (response.isError) {
           showModal({
-            description:
-              response.value?.errorMessage || "Erro ao salvar horários",
+            description: response.value?.errorMessage,
             type: "error",
           });
         }
@@ -206,8 +204,7 @@ export const useMonitorSchedules = () => {
         await getSchedules();
       } else if (response.isError) {
         showModal({
-          description:
-            response.value?.errorMessage || "Erro ao salvar horários",
+          description: response.value?.errorMessage,
           type: "error",
         });
       }

@@ -7,11 +7,7 @@ export interface Monitor {
 }
 
 export interface ImportMonitorRequest {
-  base64: string;
-}
-
-export interface ImportScheduleRequest {
-  base64: string;
+  fileBase64: string;
 }
 
 export interface MonitorScheduleHour {

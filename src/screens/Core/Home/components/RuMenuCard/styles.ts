@@ -9,7 +9,7 @@ export const Container = styled.View({
 });
 
 export const PagerWrapper = styled.View`
-  margin-bottom: ${theme.spacing.sm}px;
+  margin-bottom: 0px;
 `;
 
 export const Page = styled.View({
